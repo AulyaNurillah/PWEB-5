@@ -1,4 +1,4 @@
-// js/script.js - Revisi: Tambah slider, load more, AJAX form, scroll animations.
+// slider, load more, AJAX form, scroll animations.
 $(document).ready(function() {
     // Smooth scroll.
     $('a[href^="#"]').click(function(e) {

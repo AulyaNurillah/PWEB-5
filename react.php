@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 // react.php - simple React demo that posts to proses_form.php
 ?>
 <!DOCTYPE html>
@@ -61,4 +61,4 @@
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 </body>
-</html>
+</html> -->

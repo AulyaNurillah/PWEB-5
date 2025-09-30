@@ -1,4 +1,3 @@
-/* transitions untuk hover dan animations. */
 body {
     font-family: Arial, sans-serif;
 }
@@ -8,10 +7,11 @@ button {
     padding: 10px 20px;
 }
 
-/* Tambah untuk slider dan hover. */
 #testimonialSlider > div {
     display: none;
 }
 #testimonialSlider > div.active {
     display: block;
 }
+
+input:focus { outline: none; }

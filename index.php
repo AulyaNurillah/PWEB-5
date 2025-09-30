@@ -1,39 +1,44 @@
 <?php
 session_start();
-$error = isset($_GET['error']) ? $_GET['error'] : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Bimbel 404 - Think IT, Think Until 404</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js" defer></script>
-    <style>
-        button { background-color: red !important; }
-    </style>
+    <!-- <style> button { background-color: red !important; } </style> -->
 </head>
+
 <body class="bg-gray-100 text-gray-800">
-    <!-- Header dengan hover effects. -->
+    <!-- Header -->
     <header class="bg-blue-600 text-white p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold transition duration-300 hover:scale-105">Bimbel 404</h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="#about" class="hover:underline hover:text-yellow-300 transition duration-300">About Us</a></li>
-                    <li><a href="#programs" class="hover:underline hover:text-yellow-300 transition duration-300">Programs</a></li>
-                    <li><a href="#testimonials" class="hover:underline hover:text-yellow-300 transition duration-300">Testimonials</a></li>
-                    <li><a href="#test" class="hover:underline hover:text-yellow-300 transition duration-300">Test Your Skills</a></li>
-                </ul>
-            </nav>
-        </div>
+    <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Bimbel 404</h1>
+        <nav>
+        <ul class="flex space-x-4 items-center">
+            <li><a href="#about" class="hover:underline">About</a></li>
+            <li><a href="#programs" class="hover:underline">Programs</a></li>
+            <li><a href="#testimonials" class="hover:underline">Testimonials</a></li>
+            <li><a href="#test" class="hover:underline">Test</a></li>
+            <?php if(isset($_SESSION['user'])): ?>
+                <li><button id="logoutBtn" class="bg-white text-blue-500 px-4 py-1 rounded hover:bg-gray-200">Halo, <?php echo $_SESSION['user']['username']; ?></button></li>
+            <?php else: ?>
+                <li><button id="loginBtn" class="bg-blue-900 text-white px-4 py-1 rounded hover:bg-gray-600">Login</button></li>
+                <li><button id="signupBtn" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Signup</button></li>
+            <?php endif; ?>
+        </ul>
+        </nav>
+    </div>
     </header>
 
-    <!-- Hero Section dengan fade-in animation. -->
-    <section class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20 text-center opacity-0 transition-opacity duration-1000" id="hero">
+    <!-- Hero -->
+    <section id="hero" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20 text-center opacity-0 transition-opacity duration-1000">
         <div class="container mx-auto">
             <h2 class="text-4xl font-bold mb-4">Think IT, Think Until 404</h2>
             <p class="text-xl mb-4">Bimbel 404 adalah penyedia kursus IT premier yang berdedikasi untuk membantu individu menguasai pemrograman web dengan mudah dan percaya diri.</p>
@@ -41,7 +46,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
         </div>
     </section>
 
-    <!-- About Us dengan fade-in. -->
+    <!-- About -->
     <section id="about" class="py-16 opacity-0 transition-opacity duration-1000">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
@@ -54,12 +59,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
         </div>
     </section>
 
-    <!-- Programs Section dengan load more button (interaktif via jQuery). -->
+    <!-- Programs -->
     <section id="programs" class="bg-white py-16 opacity-0 transition-opacity duration-1000">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Programs</h2>
             <div id="programList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- Initial programs (load more akan tambah sisanya via JS). -->
                 <div class="bg-gray-50 p-6 rounded shadow hover:scale-105 transition-transform duration-300">
                     <h3 class="text-xl font-bold mb-2">Basic Web Dev</h3>
                     <p class="mb-2">5-12 Tahun</p>
@@ -82,9 +86,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
                     <h3 class="text-xl font-bold mb-2">Pro Development</h3>
                     <p class="mb-2">All Ages</p>
                     <p class="text-green-600 font-bold">Starts at Rp 250K per month</p>
-                    <a href="#register" class="text-blue-500 hover:underline">Explore Classes | Register</a>
+                    <a href="#test" class="text-blue-500 hover:underline">Explore Classes | Register</a>
                 </div>
-                <!-- Sisanya hidden, ditampilkan via load more. -->
+
+                <!-- Hidden additional programs -->
                 <div class="hidden bg-gray-50 p-6 rounded shadow hover:scale-105 transition-transform duration-300">
                     <h3 class="text-xl font-bold mb-2">Web Cert Private</h3>
                     <p class="text-green-600 font-bold">Rp 900K per month</p>
@@ -110,12 +115,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
         </div>
     </section>
 
-    <!-- Testimonials dengan jQuery slider (carousel). -->
+    <!-- Testimonials -->
     <section id="testimonials" class="py-16 bg-gray-100 opacity-0 transition-opacity duration-1000">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Testimonials</h2>
             <div id="testimonialSlider" class="grid grid-cols-1 md:grid-cols-3 gap-8 overflow-hidden">
-                <!-- Testimonials untuk slider. -->
                 <div class="bg-white p-6 rounded shadow hover:shadow-xl transition-shadow duration-300">
                     <p>"Quality IT education..."</p>
                     <p class="font-bold">- Dewi Putri Cahaya</p>
@@ -140,32 +144,44 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
         </div>
     </section>
 
-    <!-- Test Section dengan AJAX form. -->
-    <section id="test" class="py-16 opacity-0 transition-opacity duration-1000">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-8">Improve Your IT Skills</h2>
-            <p class="text-center mb-8">Discover your level with our mentor, come join us!</p>
-            <form id="testForm" class="max-w-md mx-auto bg-white p-6 rounded shadow">
-                <div id="formMessage" class="mb-4 text-red-500 hidden"></div>
-                <div class="mb-4">
-                    <label for="username" class="block text-sm font-bold mb-2">Username:</label>
-                    <input type="text" id="username" name="username" required class="w-full p-2 border rounded focus:border-blue-500 transition duration-300">
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-sm font-bold mb-2">Password:</label>
-                    <input type="password" id="password" name="password" required class="w-full p-2 border rounded focus:border-blue-500 transition duration-300">
-                </div>
-                <button type="submit" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600 transition duration-300">Register for Test</button>
-            </form>
-        </div>
+    <!-- Test / Form -->
+    <section id="test" class="py-16 text-center">
+        <h2 class="text-3xl font-bold mb-4">Improve Your IT Skills</h2>
+        <p>Login atau Signup untuk mengikuti test kami!</p>
     </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-gray-100 bg-opacity-30 hidden flex justify-center items-start pt-20 z-50">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
+        <button id="closeLogin" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl">&times;</button>
+        <h2 class="text-2xl font-bold text-center mb-4">Login</h2>
+        <form id="loginForm" class="space-y-4">
+        <input type="email" name="email" placeholder="Email" required class="w-full border rounded-lg p-2"/>
+        <input type="password" name="password" placeholder="Password" required class="w-full border rounded-lg p-2"/>
+        <div id="loginMessage" class="text-sm hidden"></div>
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Login</button>
+        </form>
+    </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="fixed inset-0 bg-gray-100 bg-opacity-30 hidden flex justify-center items-start pt-20 z-50">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
+        <button id="closeSignup" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl">&times;</button>
+        <h2 class="text-2xl font-bold text-center mb-4">Signup</h2>
+        <form id="signupForm" class="space-y-4">
+        <input type="text" name="username" placeholder="Username" required class="w-full border rounded-lg p-2"/>
+        <input type="email" name="email" placeholder="Email" required class="w-full border rounded-lg p-2"/>
+        <input type="password" name="password" placeholder="Password" required class="w-full border rounded-lg p-2"/>
+        <div id="signupMessage" class="text-sm hidden"></div>
+        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">Signup</button>
+        </form>
+    </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 text-center">
-        <p>&copy; 2025 Bimbel 404. All rights reserved.</p>
+        <p>&copy; <?php echo date("Y"); ?> Bimbel 404. All rights reserved.</p>
     </footer>
-
-    <script>
-    </script>
 </body>
 </html>
